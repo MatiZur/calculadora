@@ -117,7 +117,7 @@ int i, j, k;
 		}while(*tam1<=0);
 		for(i=0;i<*tam1;i++)
 		{
-		printf("\nIngrese el valor %d del vector 1: ",i+1);
+		printf("Ingrese el valor %d del vector 1: ",i+1);
 		scanf("%f",&vector1[i]);
 		}
 		do{
@@ -130,7 +130,7 @@ int i, j, k;
 		}while(*tam2<=0);
 		for(i=0;i<*tam2;i++)
 		{
-		printf("\nIngrese el valor %d del vector 2: \n",i+1);
+		printf("Ingrese el valor %d del vector 2: ",i+1);
 		scanf("%f",&vector2[i]);
 		}
 	}
@@ -147,7 +147,7 @@ int i, j, k;
 		}while(*tam<=0);
 		for(i=0;i<*tam;i++)
 		{
-			printf("\nIngrese el valor %d del vector: ",i+1);
+			printf("Ingrese el valor %d del vector: ",i+1);
 			scanf("%f",&vector[i]);
 		}
 	}
@@ -157,12 +157,13 @@ int i, j, k;
 		*tam=3;
 		for(i=0;i<*tam;i++)
 		{
-			printf("\nIngrese el valor %d del vector 1: ",i+1);
+			printf("Ingrese el valor %d del vector 1: ",i+1);
 			scanf("%f",&vector1[i]);
 		}
+		printf("\n");
 		for(i=0;i<*tam;i++)
 		{
-			printf("\nIngrese el valor %d del vector 2: ",i+1);
+			printf("Ingrese el valor %d del vector 2: ",i+1);
 			scanf("%f",&vector2[i]);
 		}		
 	}
@@ -172,9 +173,9 @@ int i, j, k;
 		printf("\nVector 1: ");
 		for(i=0;i<tam;i++)
 		{
-			printf("|%f|",vector1[i]);	
+			printf("|%.2f|",vector1[i]);	
 		}	
-		printf("\n\n");
+		printf("\n");
 		printf("\nVector 2: ");
 		for(i=0;i<tam;i++)
 		{
@@ -247,7 +248,7 @@ int i, j, k;
 			res=res + (vector1[i]*vector2[i]);
 		}
 		mostrarVectores(vector1,vector2,tam);
-		printf("\n\nEl resultado del producto escalar de ambos vectores es:\n%f\n\n",res);
+		printf("\n\nEl resultado del producto escalar de ambos vectores es:\n%.2f\n\n",res);
 	}
 	
 	void productoVectorial(float vector1[], float vector2[], int tam)
