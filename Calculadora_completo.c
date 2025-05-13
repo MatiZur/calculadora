@@ -382,7 +382,7 @@ int i, j, k;
 	
 	void multiplicarMatrices(float matriz1[4][4], float matriz2[4][4], int filas1, int columnas1, int filas2, int columnas2, float resultado[4][4]) {
 	    if (columnas1 != filas2) {
-	        printf("Error, las columnas de la primer matriz tienen que ser iguales a las filas de la segunda \n");
+	        printf("Error: Las columnas de la primer matriz tienen que ser iguales a las filas de la segunda.\n");
 	        return;
 	    }
 	
@@ -465,7 +465,7 @@ int i, j, k;
 	float inversa(float matriz[4][4], float inversa[4][4], float n) {
 	    float det = determinante(matriz, n);
 	    if (det == 0) {
-	        printf("La matriz no tiene inversa\n");
+	        printf("Error: La matriz no tiene inversa.\n");
 	        return 0;
 	    }
 	    float adj[4][4];
@@ -481,7 +481,7 @@ int i, j, k;
 	void dividirMatrices(float matriz1[4][4], float matriz2[4][4], int filas, int columnas, float resultado[4][4]) {
 	    float inversa2[4][4];
 	    if (inversa(matriz2, inversa2, filas) == 0) {
-	        printf("No se puede dividir porque la segunda matriz no tiene inversa\n");
+	        printf("Error: No se puede dividir porque la segunda matriz no tiene inversa.\n");
 	        return;
 	    }
 	    else{
@@ -584,7 +584,7 @@ int i, j, k;
 	                        mostrarMatriz(inversaMatriz, filas1, columnas1);
 	                    }
 	                } else {
-	                    printf("Error: La matriz debe ser del mismo tama?o para calcular la inversa.\n");
+	                    printf("Error: La matriz debe ser del mismo tamanio para calcular la inversa.\n");
 	                }          
 	            	break;
 	            case 7:
@@ -593,7 +593,7 @@ int i, j, k;
 	                    printf("Resultado de la division:\n");
 	                    mostrarMatriz(resultado, filas1, columnas1);
 	                } else {
-	                    printf("Error: Ambas matrices deben ser del mismo tama?o para dividir.\n");
+	                    printf("Error: Ambas matrices deben ser del mismo tamanio para dividir.\n");
 	                }
 	                break;
 	            case 8:
