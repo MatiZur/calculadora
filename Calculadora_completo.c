@@ -4,22 +4,22 @@ int i, j, k;
 
 	void suma(float *num1, float *num2){
 		float res = *num1 + *num2;
-		printf("\nLa suma entre %f y %f da %f.\n\n", *num1, *num2, res);
+		printf("\nLa suma entre %.2f y %.2f da %.2f.\n\n", *num1, *num2, res);
 	}
 	
 	void resta(float *num1, float *num2){
 		float res = *num1 - *num2;
-		printf("\nLa resta entre %f y %f da %f.\n\n", *num1, *num2, res);
+		printf("\nLa resta entre %.2f y %.2f da %.2f.\n\n", *num1, *num2, res);
 	}
 	
 	void multi(float *num1, float *num2){
 		float res = *num1 * *num2;
-		printf("\nLa multiplicacion entre %f y %f da %f.\n\n", *num1, *num2, res);
+		printf("\nLa multiplicacion entre %.2f y %.2f da %.2f.\n\n", *num1, *num2, res);
 	}
 	
 	void divi(float *num1, float *num2){
 		float res = *num1 / *num2;
-		printf("\nLa division entre %f y %f da %f.\n\n", *num1, *num2, res);
+		printf("\nLa division entre %.2f y %.2f da %.2f.\n\n", *num1, *num2, res);
 	}
 	
 	void potencia(){
@@ -29,7 +29,7 @@ int i, j, k;
 		printf("Ingrese el exponente: ");
 		scanf("%f",&num2);
 		float res = pow(num1, num2);
-		printf("\nLa potencia de %f de exponente %f da %f.\n\n", num1, num2, res);
+		printf("\nLa potencia de %.2f de exponente %.2f da %.2f.\n\n", num1, num2, res);
 	}
 	
 	void raiz(){
@@ -49,7 +49,7 @@ int i, j, k;
 			}
 		}while(num2==0);
 		float res = pow(num1, (1 / num2));
-		printf("\nLa raiz de %f de indice %f da %f.\n\n\n", num1, num2, res);
+		printf("\nLa raiz de %.2f de indice %.2f da %.2f.\n\n\n", num1, num2, res);
 	}
 	
 	int mainNumeros(){
@@ -178,7 +178,7 @@ int i, j, k;
 		printf("\nVector 2: ");
 		for(i=0;i<tam;i++)
 		{
-			printf("|%f|",vector2[i]);	
+			printf("|%.2f|",vector2[i]);	
 			}
 		printf("\n");
 		}
@@ -194,7 +194,7 @@ int i, j, k;
 		printf("\n\nEl resultado de la suma de ambos vectores es:\n");
 		for(i=0;i<tam;i++)
 		{
-			printf("|%f|",res[i]);
+			printf("|%.2f|",res[i]);
 		}
 		printf("\n\n");
 	}
@@ -210,7 +210,7 @@ int i, j, k;
 		printf("\nEl resultado de la resta de ambos vectores es:\n");
 		for(i=0;i<tam;i++)
 		{
-			printf("|%f|",res[i]);
+			printf("|%.2f|",res[i]);
 		}	
 		printf("\n\n");
 	}
@@ -228,13 +228,13 @@ int i, j, k;
 		printf("\nVector: ");
 		for(i=0;i<tam;i++)
 		{
-			printf("|%f|",vector1[i]);	
+			printf("|%.2f|",vector1[i]);	
 		}
 		printf("\n");
 		printf("\nEl resultado de la multiplicacion entre el escalar y el vector es:\n");
 		for(i=0;i<tam;i++)
 		{
-			printf("|%f|",res[i]);
+			printf("|%.2f|",res[i]);
 		}
 		printf("\n\n");
 	}
@@ -268,7 +268,7 @@ int i, j, k;
 		}
 		mostrarVectores(vector1,vector2,tam);
 		printf("\nEl valor del producto vectorial de ambos vectores es:\n");
-		printf("(%f;%f;%f)",res[0],res[1],res[2]);
+		printf("(%.2f;%.2f;%.2f)",res[0],res[1],res[2]);
 		printf("\n\n");
 	}
 	
@@ -337,7 +337,7 @@ int i, j, k;
 	    printf("Cargar matriz %d (%dx%d):\n", numMatriz, filas, columnas);
 	    for(i = 0; i < filas; i++) {
 	        for(j = 0; j < columnas; j++) {
-	            printf("Elemento [%d][%d]: ", i, j);
+	            printf("Elemento [%d][%d]: ", i, j);	
 	            scanf("%f", &matriz[i][j]);
 	        }
 	    }
@@ -371,7 +371,7 @@ int i, j, k;
 	}
 	
 	
-	void multiplicarEscalar(float matriz[4][4], int filas, int columnas, int escalar, float resultado[4][4]) {
+	void multiplicarEscalar(float matriz[4][4], int filas, int columnas, float escalar, float resultado[4][4]) {
 	    for(i = 0; i < filas; i++) {
 	        for(j = 0; j < columnas; j++) {
 	            resultado[i][j] = matriz[i][j] * escalar;
@@ -503,7 +503,7 @@ int i, j, k;
 	        printf("\n\n1: Suma | 2: Resta matrices | 3: Multiplicacion por un escalar | 4: Multiplicacion de matrices\n5: Determinante | 6: Inversa | 7: Division | 8: Salir\nIngrese su opcion: ");
 	        scanf("%d", &opcion);
 	        
-			if(opcion == 5 || opcion == 6){
+			if(opcion == 5 || opcion == 6 || opcion == 3){
 		 		printf("Ingrese las filas de la matriz: ");
 				scanf("%d", &filas1);
 	  	 		printf("Ingrese las columnas de la matriz: ");
@@ -543,17 +543,10 @@ int i, j, k;
 	
 	            case 3:
 	                printf("Ingrese el escalar: ");
-	                scanf("%d", &escalar);
-	                int opcionMatriz;
-	                printf("Elija la matriz para multiplicar por el escalar: ");
-	                scanf("%d", &opcionMatriz);
-	                if (opcionMatriz == 1) {
+	                scanf("%f", &escalar);
+	                
 	                    multiplicarEscalar(matriz1, filas1, columnas1, escalar, resultado);
 	                    mostrarMatriz(resultado, filas1, columnas1);
-	                } else if (opcionMatriz == 2) {
-	                    multiplicarEscalar(matriz2, filas2, columnas2, escalar, resultado);
-	                    mostrarMatriz(resultado, filas2, columnas2);
-	                } 
 	                break;
 	
 	            case 4:
@@ -570,9 +563,9 @@ int i, j, k;
 		            	
 	            	 if (filas1 == columnas1) {
 						
-	      				printf("El determinante de la matriz es: %d\n", determinante(matriz1, filas1));
+	      				printf("El determinante de la matriz es: %.2f\n", determinante(matriz1, filas1));
 	    			} else {
-	        			printf("Error: La matriz debe ser del mismo tama?o el determinante.\n");
+	        			printf("Error: La matriz debe ser del mismo tamanio el determinante.\n");
 	                } 
 	            	break;
 	            
@@ -623,7 +616,7 @@ int i, j, k;
 		}
 		y = resR / resB;
 		x = (r1 - (b1 * y)) / a1;
-		printf("\n\nx es igual a %f.\ny es igual a %f.\n\n",x,y);
+		printf("\n\nx es igual a %.2f.\ny es igual a %.2f.\n\n",x,y);
 	}
 	
 	void sistema3(){
@@ -651,7 +644,7 @@ int i, j, k;
 		z = finalR / finalC;
 		y = (resR1 - (resC1 * z)) / resB1;
 		x = (r1 - (b1 * y) - (c1 * z)) / a1;
-		printf("\n\nx es igual a %f.\ny es igual a %f.\nz es igual a %f.\n\n",x,y,z);
+		printf("\n\nx es igual a %.2f.\ny es igual a %.2f.\nz es igual a %.2f.\n\n",x,y,z);
 	}
 	
 	int mainSistemas(){
