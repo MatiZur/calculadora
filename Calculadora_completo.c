@@ -617,7 +617,7 @@ int i, j, k;
 		printf("\nLas ecuaciones son:\n%dx + %dy = %d\n%dx + %dy = %d", a1, b1, r1, a2, b2, r2);
 		resB = (a2 * b1) - (a1 * b2);
 		resR = (a2 * r1) - (a1 * r2);
-		if(resB == 0){
+		if(resB == 0 || a1 == 0){
 	    	printf("\n\nEl sistema no tiene solucion unica o hay una division por cero.\n\n");
 	    	return;
 		}
