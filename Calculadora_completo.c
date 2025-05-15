@@ -479,7 +479,12 @@ int i, j, k;
 	    for (i = 0; i < n; i++) {
 	        for (j = 0; j < n; j++) {
 	            cofactor(matriz, temp, i, j, n);
-	            signo = ((i + j) % 2 == 0) ? 1 : -1;
+	            if((i + j) % 2 == 0){
+	            signo = 1;	            
+				}
+				else{
+	            signo = -1;
+				}
 	            adj[j][i] = signo * determinante(temp, n - 1);
 	        }
 	    }
