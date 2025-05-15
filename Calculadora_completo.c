@@ -431,36 +431,6 @@ int i, j, k;
 	    return;
 	}
 	
-	float determinante(float matriz[4][4], float n) {
-	    if (n == 1) {
-	    	return matriz[0][0];
-		}
-	    int det = 0;  
-	    float submatriz[4][4];  
-	    int signo;
-		int col;
-	    for (col = 0; col < n; col++) {
-	        int subi = 0;  
-	        for (i = 1; i < n; i++) {
-	            int subj = 0;  
-	            for (j = 0; j < n; j++) {
-	                if (j != col) {
-	                    submatriz[subi][subj] = matriz[i][j];
-	                    subj++;  
-	                }
-	            }
-	            subi++; 
-	        }
-	        if (col % 2 == 0) {
-	            signo = 1;
-	        } else {
-	            signo = -1;
-	        }
-	        det += signo * matriz[0][col] * determinante(submatriz, n - 1);
-	    }
-	    return det; 
-	}
-	
 	void cofactor(float matriz[4][4], float temp[4][4], int p, int q, int n) { // p = fila salteada q = columna salteada
 	    int i = 0, j = 0;
 	    int fila, col;
@@ -478,7 +448,28 @@ int i, j, k;
 	    return;
 	}
 	
-	void adjunta(float matriz[4][4], float adj[4][4], float n) {
+		float determinante(float matriz[4][4], int n) {
+	    if (n == 1) {
+	    	return matriz[0][0];
+		}
+	    float det = 0;  
+	    float submatriz[4][4];  
+	    int signo;
+		int col;
+	    for (col = 0; col < n; col++) {
+	         cofactor(matriz, submatriz, 0, col, n);
+	        
+	        if (col % 2 == 0) {
+	            signo = 1;
+	        } else {
+	            signo = -1;
+	        }
+	        det += signo * matriz[0][col] * determinante(submatriz, n - 1);
+	    }
+	    return det; 
+	}
+	
+	void adjunta(float matriz[4][4], float adj[4][4], int n) {
 	    if (n == 1) {
 	        adj[0][0] = 1;
 	        return;
@@ -495,10 +486,9 @@ int i, j, k;
 	    return;
 	}
 	
-	float inversa(float matriz[4][4], float inversa[4][4], float n) {
+	int inversa(float matriz[4][4], float inversa[4][4], int n) {
 	    float det = determinante(matriz, n);
 	    if (det == 0) {
-	        printf("\n\nError: La matriz no tiene inversa.\n\n");
 	        return 0;
 	    }
 	    float adj[4][4];
@@ -511,14 +501,20 @@ int i, j, k;
 	    return 1;
 	}
 	
-	void dividirMatrices(float matriz1[4][4], float matriz2[4][4], int filas, int columnas, float resultado[4][4], int opcion) {
+	void dividirMatrices(float matriz1[4][4], float matriz2[4][4], int filas1, int columnas1, int filas2, int columnas2, float resultado[4][4], int opcion) {
 	    float inversa2[4][4];
-	    if (inversa(matriz2, inversa2, filas) == 0) {
+	    if (filas2 != columnas2) {
+    		printf("\n\nError: La matriz 2 debe ser cuadrada para poder invertirla.\n\n");
+    		return;
+		}
+	    if (inversa(matriz2, inversa2, filas2) == 0) {
 	        printf("\n\nError: No se puede dividir porque la segunda matriz no tiene inversa.\n\n");
 	        return;
 	    }
 	    else{
-	    multiplicarMatrices(matriz1, inversa2, filas, columnas, filas, columnas, resultado, opcion);
+	    multiplicarMatrices(matriz1, inversa2, filas1, columnas1, filas2, columnas2, resultado, opcion);
+	    printf("\n\nEl resultado de la divisi%cn entre las matrices es:\n", 162);
+	    mostrarMatriz(resultado, filas1, columnas1);
 		}
 		return;
 	}
@@ -595,22 +591,20 @@ int i, j, k;
 	            case 6: 
 	                  if (filas1 == columnas1) {
 	                    float inversaMatriz[4][4];
-	                    if (inversa(matriz1, inversaMatriz, filas1)) {
+	                    if (inversa(matriz1, inversaMatriz, filas1)==1) {
+	                    	inversa(matriz1, inversaMatriz, filas1);
 	                        printf("\n\nLa inversa de la matriz es:\n");
 	                        mostrarMatriz(inversaMatriz, filas1, columnas1);
-	                    }
+	                    }else
+	                    {
+	                    	printf("\n\nError: La matriz no tiene inversa.\n\n");
+						}
 	                } else {
 	                    printf("\n\nError: La matriz debe ser del mismo tama%co para calcular la inversa.\n\n", 164);
 	                }          
 	            	break;
 	            case 7:
-	                if (filas1 == columnas1 && filas2 == columnas2 && filas1 == filas2) {
-	                    dividirMatrices(matriz1, matriz2, filas1, columnas1, resultado, opcion);
-	                    printf("\n\nEl resultado de la divisi%cn entre las matrices es:\n", 162);
-	                    mostrarMatriz(resultado, filas1, columnas1);
-	                } else {
-	                    printf("\n\nError: Ambas matrices deben ser del mismo tama%co.\n\n", 164);
-	                }
+	                    dividirMatrices(matriz1, matriz2, filas1, columnas1, filas2, columnas2, resultado, opcion);
 	                break;
 	            case 8:
 					printf("\n\nSaliendo de Matrices...\n\n\n\n");
