@@ -536,20 +536,44 @@ int i, j, k;
 			if(opcion == 3 || opcion == 5 || opcion == 6){
 				printf("\n\nIngrese las filas de la matriz: ");
 				scanf("%d", &filas1);
+				if(filas1 >= 5){
+					printf("\nError: Este programa no admite tama%cos mayores a 5.\n\n\n", 164);
+					return;
+				}
 				printf("Ingrese las columnas de la matriz: ");
 				scanf("%d", &columnas1);
+				if(columnas1 >= 5){
+					printf("\nError: Este programa no admite tama%cos mayores a 5.\n\n\n", 164);
+					return;
+				}
 	    		cargarMatriz(matriz1, filas1, columnas1, 1);
 			}
 			else if(opcion >= 1 && opcion <= 7){
 				printf("\n\nIngrese las filas de la matriz 1: ");
 				scanf("%d", &filas1);
+				if(filas1 >= 5){
+					printf("\nError: Este programa no admite tama%cos mayores a 5.\n\n\n", 164);
+					return;
+				}
 				printf("Ingrese las columnas de la matriz 1: ");
 				scanf("%d", &columnas1);
+				if(columnas1 >= 5){
+					printf("\nError: Este programa no admite tama%cos mayores a 5.\n\n\n", 164);
+					return;
+				}
 	    		cargarMatriz(matriz1, filas1, columnas1, 1);
 	    		printf("\nIngrese las filas de la matriz 2: ");
 				scanf("%d", &filas2);
+				if(filas2 >= 5){
+					printf("\nError: Este programa no admite tama%cos mayores a 5.\n\n\n", 164);
+					return;
+				}
 				printf("Ingrese las columnas de la matriz 2: ");
 	    		scanf("%d", &columnas2);
+	    		if(columnas2 >= 5){
+					printf("\nError: Este programa no admite tama%cos mayores a 5.\n\n\n", 164);
+					return;
+				}
 	    		cargarMatriz(matriz2, filas2, columnas2, 2);			
 			}
 	        switch(opcion) {
@@ -699,9 +723,7 @@ int i, j, k;
 
 int main(){
 	printf("                     - Bienvenido al programa Calculadora -\n");
-	printf("Desarrollado por Santiago Papale, Octavio Romero, Leandro Zelaya y Matias Zurita\n");
-	printf("            Materia: Laboratorio de Programaci%cn Orientada a Objetos\n", 162);
-	printf("                           Profesor: Juan Manuel Moya\n\n\n\n");
+	printf("Desarrollado por Santiago Papale, Octavio Romero, Leandro Zelaya y Matias Zurita\n\n\n\n");
 	int opcion;
 	do{
 		printf("1: N%cmeros | 2: Vectores | 3: Matrices | 4: Sistemas de ecuaciones | 5: Terminar programa\n\nIngrese la opci%cn con la que desea trabajar: ", 163, 162);
