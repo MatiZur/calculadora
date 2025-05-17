@@ -536,14 +536,10 @@ int i, j, k;
 			if(opcion == 3 || opcion == 5 || opcion == 6){
 				printf("\n\nIngrese las filas de la matriz: ");
 				scanf("%d", &filas1);
-				if(filas1 >= 5){
-					printf("\nError: Este programa no admite tama%cos mayores a 5.\n\n\n", 164);
-					return;
-				}
 				printf("Ingrese las columnas de la matriz: ");
 				scanf("%d", &columnas1);
-				if(columnas1 >= 5){
-					printf("\nError: Este programa no admite tama%cos mayores a 5.\n\n\n", 164);
+				if(filas1 >= 5 || columnas1 >= 5){
+					printf("\nError: Este programa no admite tama%cos mayores a 4.\n\n\n", 164);
 					return;
 				}
 	    		cargarMatriz(matriz1, filas1, columnas1, 1);
@@ -551,27 +547,19 @@ int i, j, k;
 			else if(opcion >= 1 && opcion <= 7){
 				printf("\n\nIngrese las filas de la matriz 1: ");
 				scanf("%d", &filas1);
-				if(filas1 >= 5){
-					printf("\nError: Este programa no admite tama%cos mayores a 5.\n\n\n", 164);
-					return;
-				}
 				printf("Ingrese las columnas de la matriz 1: ");
 				scanf("%d", &columnas1);
-				if(columnas1 >= 5){
-					printf("\nError: Este programa no admite tama%cos mayores a 5.\n\n\n", 164);
+				if(filas1 >= 5 || columnas1 >= 5){
+					printf("\nError: Este programa no admite tama%cos mayores a 4.\n\n\n", 164);
 					return;
 				}
 	    		cargarMatriz(matriz1, filas1, columnas1, 1);
 	    		printf("\nIngrese las filas de la matriz 2: ");
 				scanf("%d", &filas2);
-				if(filas2 >= 5){
-					printf("\nError: Este programa no admite tama%cos mayores a 5.\n\n\n", 164);
-					return;
-				}
 				printf("Ingrese las columnas de la matriz 2: ");
 	    		scanf("%d", &columnas2);
-	    		if(columnas2 >= 5){
-					printf("\nError: Este programa no admite tama%cos mayores a 5.\n\n\n", 164);
+	    		if(filas2 >= 5 || columnas2 >= 5){
+					printf("\nError: Este programa no admite tama%cos mayores a 4.\n\n\n", 164);
 					return;
 				}
 	    		cargarMatriz(matriz2, filas2, columnas2, 2);			
