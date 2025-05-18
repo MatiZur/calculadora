@@ -233,7 +233,7 @@ int i, j, k;
 		return;
 	}
 	
-	void multiEscalar(float vector1[], int tam)
+	void multiEscalar(float vector[], int tam)
 	{
 		float escalar;
 		float res[tam];
@@ -241,12 +241,12 @@ int i, j, k;
 		scanf("%f",&escalar);
 		for(i=0;i<tam;i++)
 		{
-			res[i]=escalar * vector1[i];
+			res[i]=escalar * vector[i];
 		}
 		printf("\nVector: |");
 		for(i=0;i<tam;i++)
 		{
-			printf(" %.2f",vector1[i]);	
+			printf(" %.2f",vector[i]);	
 		}
 		printf(" |\n");
 		printf("\n\nEl resultado de la multiplicaci%cn entre el escalar y el vector es: |", 162);
