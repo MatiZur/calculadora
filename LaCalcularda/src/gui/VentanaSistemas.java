@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.*;
 
 import operaciones.Operaciones;
+import java.awt.Color;
 
 public class VentanaSistemas extends JFrame {
 
@@ -18,7 +19,7 @@ public class VentanaSistemas extends JFrame {
     private JLabel lblX1, lblY1, lblZ1, lblR1;
     private JLabel lblX2, lblY2, lblZ2, lblR2;
     private JLabel lblX3, lblY3, lblZ3, lblR3;
-    private JButton btnCalcular;
+    private JButton btnCalcular3x3;
     private JButton btnCalcular2x2;
     private JLabel lblXE, lblYE, lblZE;
     private JLabel lblX, lblY, lblZ;
@@ -40,8 +41,9 @@ public class VentanaSistemas extends JFrame {
         contentPane.add(comboSistema);
 
         lblSistemas3 = new JLabel("Sistema 3x3");
+        lblSistemas3.setForeground(new Color(0, 0, 0));
         lblSistemas3.setFont(new Font("Tahoma", Font.PLAIN, 24));
-        lblSistemas3.setBounds(150, 10, 254, 30);
+        lblSistemas3.setBounds(200, 10, 180, 30);
         contentPane.add(lblSistemas3);
 
     
@@ -193,18 +195,23 @@ public class VentanaSistemas extends JFrame {
         contentPane.add(lblZ);
 
       
-        btnCalcular = new JButton("Calcular 3x3");
-        btnCalcular.setBounds(400, 60, 110, 30);
-        contentPane.add(btnCalcular);
+        btnCalcular3x3 = new JButton("Calcular");
+        btnCalcular3x3.setBounds(400, 97, 110, 30);
+        contentPane.add(btnCalcular3x3);
 
-        btnCalcular2x2 = new JButton("Calcular 2x2");
-        btnCalcular2x2.setBounds(400, 100, 110, 30);
+        btnCalcular2x2 = new JButton("Calcular");
+        btnCalcular2x2.setBounds(400, 78, 110, 30);
         contentPane.add(btnCalcular2x2);
+        
+        JButton btnBorrar = new JButton("Borrar");
+        btnBorrar.setBounds(400, 137, 110, 30);
+        contentPane.add(btnBorrar);
 
         
-        btnCalcular.addActionListener(e -> calcularSistema3());
+        btnCalcular3x3.addActionListener(e -> calcularSistema3());
         btnCalcular2x2.addActionListener(e -> calcularSistema2());
-
+        btnBorrar.addActionListener(e -> limpiarCampos());
+        
 
         comboSistema.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -221,8 +228,12 @@ public class VentanaSistemas extends JFrame {
     private void actualizarComponentesSegunSistema() {
     	if (sistema3x3) {
     	    lblSistemas3.setText("Sistema 3x3");
+    	    btnCalcular2x2.setVisible(false);
+    	    btnCalcular3x3.setVisible(true);
     	} else {
     	    lblSistemas3.setText("Sistema 2x2");
+    	    btnCalcular2x2.setVisible(true);
+    	    btnCalcular3x3.setVisible(false);
     	}      
         txtZ1.setVisible(sistema3x3);
         lblZ1.setVisible(sistema3x3);
@@ -278,7 +289,14 @@ public class VentanaSistemas extends JFrame {
             int r3 = Integer.parseInt(txtR3.getText());
 
             float[] variables = Operaciones.sistema3(x1, y1, z1, r1, x2, y2, z2, r2, x3, y3, z3, r3);
-
+            
+            for(int i = 0 ; i < 3 ; i++){
+            	if (Float.isNaN(variables[i]) || Float.isInfinite(variables[i])){
+                    JOptionPane.showMessageDialog(this, "El sistema no tiene solución, tiene más de una sola o hay una división por cero.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+            
             lblX.setText(Float.toString(variables[0]));
             lblY.setText(Float.toString(variables[1]));
             lblZ.setText(Float.toString(variables[2]));
@@ -297,9 +315,17 @@ public class VentanaSistemas extends JFrame {
             int r2 = Integer.parseInt(txtR2.getText());
 
             float[] res = Operaciones.sistema2(x1, y1, r1, x2, y2, r2);
+            
+            for(int i = 0 ; i < 2 ; i++){
+            	if (Float.isNaN(res[i]) || Float.isInfinite(res[i])){
+                    JOptionPane.showMessageDialog(this, "El sistema no tiene solución, tiene más de una sola o hay una división por cero.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+            
             lblX.setText(Float.toString(res[0]));
             lblY.setText(Float.toString(res[1]));
-            lblZ.setText("-");
+            lblZ.setText("");
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Ingresá bien los números.", "Error", JOptionPane.ERROR_MESSAGE);
         }
