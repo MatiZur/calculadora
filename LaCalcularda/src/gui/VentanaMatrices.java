@@ -3,21 +3,24 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 import operaciones.Operaciones;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaMatrices extends JFrame {
     
     private JTextField filasAField, columnasAField;
     private JTextField filasBField, columnasBField;
+    private JTextField escalarField;
     
     private JPanel panelMatrizA, panelMatrizB;
     private JTextArea resultadoArea;
     private JTextField[][] camposA, camposB;
 
-    float[][] ans = null;
+    float[][] ans;
 
     public VentanaMatrices() {
     	setTitle("La Calcularda - Matrices");
-        setSize(803, 600);
+        setSize(1100, 600);
         setLocationRelativeTo(null);
         getContentPane().setLayout(null);
 
@@ -48,49 +51,57 @@ public class VentanaMatrices extends JFrame {
         getContentPane().add(filasBField);
 
         JLabel lblColumnasB = new JLabel("Columnas B:");
-        lblColumnasB.setBounds(340, 10, 80, 25);
+        lblColumnasB.setBounds(344, 10, 80, 25);
         getContentPane().add(lblColumnasB);
 
         columnasBField = new JTextField("2");
         columnasBField.setBounds(420, 10, 40, 25);
         getContentPane().add(columnasBField);
+        
+        JLabel lblEscalar = new JLabel("Escalar:");
+        lblEscalar.setBounds(706, 10, 70, 25);
+        getContentPane().add(lblEscalar);
+
+        escalarField = new JTextField();
+        escalarField.setBounds(760, 10, 40, 25);
+        getContentPane().add(escalarField);
 
         JButton generarBtn = new JButton("Generar");
-        generarBtn.setBounds(470, 10, 100, 25);
+        generarBtn.setBounds(494, 10, 100, 25);
         getContentPane().add(generarBtn);
 
         JButton borrarBtn = new JButton("Borrar");
-        borrarBtn.setBounds(580, 10, 100, 25);
+        borrarBtn.setBounds(887, 10, 100, 25);
         getContentPane().add(borrarBtn);
 
         JButton ansBtn = new JButton("Ans");
-        ansBtn.setBounds(690, 10, 64, 25);
+        ansBtn.setBounds(1010, 10, 64, 25);
         getContentPane().add(ansBtn);
 
         panelMatrizA = new JPanel();
         panelMatrizA.setBorder(BorderFactory.createTitledBorder("Matriz A"));
-        panelMatrizA.setBounds(10, 50, 300, 200);
+        panelMatrizA.setBounds(185, 46, 300, 200);
         panelMatrizA.setLayout(new GridLayout(0, 1));
         getContentPane().add(panelMatrizA);
 
         panelMatrizB = new JPanel();
         panelMatrizB.setBorder(BorderFactory.createTitledBorder("Matriz B"));
-        panelMatrizB.setBounds(320, 50, 300, 200);
+        panelMatrizB.setBounds(614, 46, 300, 200);
         panelMatrizB.setLayout(new GridLayout(0, 1));
         getContentPane().add(panelMatrizB);
 
         resultadoArea = new JTextArea();
         resultadoArea.setEditable(false);
         JScrollPane scroll = new JScrollPane(resultadoArea);
-        scroll.setBounds(10, 330, 610, 200);
+        scroll.setBounds(10, 330, 1065, 200);
         getContentPane().add(scroll);
 
         JButton sumarBtn = new JButton("Sumar");
-        sumarBtn.setBounds(10, 270, 100, 25);
+        sumarBtn.setBounds(10, 270, 90, 25);
         getContentPane().add(sumarBtn);
 
         JButton restarBtn = new JButton("Restar");
-        restarBtn.setBounds(120, 270, 100, 25);
+        restarBtn.setBounds(110, 270, 95, 25);
         getContentPane().add(restarBtn);
 
         generarBtn.addActionListener(e -> generarCampos());
@@ -101,25 +112,35 @@ public class VentanaMatrices extends JFrame {
         restarBtn.addActionListener(e -> realizarOperacion("restar"));
 
         JButton multiplicarBtn = new JButton("Multiplicar");
-        multiplicarBtn.setBounds(230, 270, 100, 25);
+        multiplicarBtn.setBounds(433, 270, 106, 25);
         getContentPane().add(multiplicarBtn);
 
         JButton dividirBtn = new JButton("Dividir");
-        dividirBtn.setBounds(340, 270, 100, 25);
+        dividirBtn.setBounds(549, 270, 90, 25);
         getContentPane().add(dividirBtn);
 
-        JButton inversaBtn = new JButton("Inversa A");
-        inversaBtn.setBounds(616, 270, 100, 25);
+        JButton inversaBtn = new JButton("Inversa (A)");
+        inversaBtn.setBounds(958, 270, 117, 25);
         getContentPane().add(inversaBtn);
 
-        JButton determinanteBtn = new JButton("Determinante A");
-        determinanteBtn.setBounds(463, 270, 130, 25);
+        JButton determinanteBtn = new JButton("Determinante (A)");
+        determinanteBtn.setBounds(651, 270, 139, 25);
         getContentPane().add(determinanteBtn);
+        
+        JButton multiplicarEscalarBtn = new JButton("Multiplicar por escalar (A)");
+        multiplicarEscalarBtn.setBounds(215, 270, 208, 25);
+        getContentPane().add(multiplicarEscalarBtn);
+        
+        JButton transpuestaBtn = new JButton("Transpuesta (A)");
+        transpuestaBtn.setBounds(800, 270, 148, 25);
+        getContentPane().add(transpuestaBtn);
 
         multiplicarBtn.addActionListener(e -> realizarOperacion("multiplicar"));
         dividirBtn.addActionListener(e -> realizarOperacion("dividir"));
         inversaBtn.addActionListener(e -> realizarOperacion("inversa"));
         determinanteBtn.addActionListener(e -> realizarOperacion("determinante"));
+        multiplicarEscalarBtn.addActionListener(e -> realizarOperacion("multiplicarEscalar"));
+        transpuestaBtn.addActionListener(e -> realizarOperacion("transpuesta"));
     }
 
     private void generarCampos() {
@@ -140,14 +161,14 @@ public class VentanaMatrices extends JFrame {
 
             for (int i = 0; i < filasA; i++) {
                 for (int j = 0; j < columnasA; j++) {
-                    camposA[i][j] = new JTextField("0", 3);
+                    camposA[i][j] = new JTextField("", 3);
                     panelMatrizA.add(camposA[i][j]);
                 }
             }
 
             for (int i = 0; i < filasB; i++) {
                 for (int j = 0; j < columnasB; j++) {
-                    camposB[i][j] = new JTextField("0", 3);
+                    camposB[i][j] = new JTextField("", 3);
                     panelMatrizB.add(camposB[i][j]);
                 }
             }
@@ -167,6 +188,7 @@ public class VentanaMatrices extends JFrame {
         columnasAField.setText(null);
         filasBField.setText(null);
         columnasBField.setText(null);
+        escalarField.setText(null);
         resultadoArea.setText(null);
         panelMatrizA.removeAll();
         panelMatrizB.removeAll();
@@ -200,7 +222,7 @@ public class VentanaMatrices extends JFrame {
             float[][] b = new float[filasB][columnasB];
 
            
-            if (operacion.equals("inversa") || operacion.equals("determinante")) {
+            if (operacion.equals("inversa") || operacion.equals("determinante") || operacion.equals("multiplicarEscalar") || operacion.equals("transpuesta")) {
                 for (int i = 0; i < filasA; i++) {
                     for (int j = 0; j < columnasA; j++) {
                         a[i][j] = Float.parseFloat(camposA[i][j].getText());
@@ -279,6 +301,14 @@ public class VentanaMatrices extends JFrame {
                     float det = Operaciones.determinante(a, filasA);
                     textoResultado = "Determinante: " + String.format("%.2f", det);
                     break;
+                case "multiplicarEscalar":
+                	int escalar = Integer.parseInt(escalarField.getText());
+                	resultado = Operaciones.multiplicarEscalar(a, escalar);
+                    break;
+                case "transpuesta":
+                	resultado = Operaciones.transpuesta(a);
+                	ans = resultado;
+                    break;
                 default:
                     return;
             }
@@ -290,7 +320,7 @@ public class VentanaMatrices extends JFrame {
             }
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error al leer las matrices. Asegúrate de ingresar números válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al leer las matrices y/o escalar. Asegúrate de ingresar números válidos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
