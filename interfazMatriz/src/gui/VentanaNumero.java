@@ -64,60 +64,58 @@ public class VentanaNumero extends JFrame {
 
     private void realizarOperacion(String operacion) {
         try {
+            float num1;
+            float num2;
             float res = 0;
             String texto = "";
 
+            if (operacion.equals("Potencia") || operacion.equals("Raiz")) {
+                num1 = Float.parseFloat(textPR.getText());
+                num2 = Float.parseFloat(textN2.getText());
+            } else {
+                num1 = Float.parseFloat(textN1.getText());
+                num2 = Float.parseFloat(textN2.getText());
+            }
+
             switch (operacion) {
                 case "Suma":
-                    float s1 = Float.parseFloat(textN1.getText());
-                    float s2 = Float.parseFloat(textN2.getText());
-                    res = s1 + s2;
+                    res = num1 + num2;
                     texto = "Suma: " + res;
                     break;
                 case "Resta":
-                    float r1 = Float.parseFloat(textN1.getText());
-                    float r2 = Float.parseFloat(textN2.getText());
-                    res = r1 - r2;
+                    res = num1 - num2;
                     texto = "Resta: " + res;
                     break;
                 case "Multiplicacion":
-                    float m1 = Float.parseFloat(textN1.getText());
-                    float m2 = Float.parseFloat(textN2.getText());
-                    res = m1 * m2;
+                    res = num1 * num2;
                     texto = "Multiplicacion: " + res;
                     break;
                 case "Division":
-                    float d1 = Float.parseFloat(textN1.getText());
-                    float d2 = Float.parseFloat(textN2.getText());
-                    if (d2 == 0) {
+                    if (num2 == 0) {
                         texto = "Error: Division por cero.";
                     } else {
-                        res = d1 / d2;
+                        res = num1 / num2;
                         texto = "Division: " + res;
                     }
                     break;
                 case "Potencia":
-                    float base = Float.parseFloat(textPR.getText());
-                    float exponente = Float.parseFloat(textN2.getText());
-                    res = (float) Math.pow(base, exponente);
+                    res = (float) Math.pow(num1, num2);
                     texto = "Potencia: " + res;
                     break;
                 case "Raiz":
-                    float radicando = Float.parseFloat(textPR.getText());
-                    float indice = Float.parseFloat(textN2.getText());
-                    if (indice == 0) {
+                    if (num2 == 0) {
                         texto = "Error: Indice cero.";
                     } else {
-                        res = (float) Math.pow(radicando, 1.0 / indice);
+                        res = (float) Math.pow(num1, 1.0 / num2);
                         texto = "Raiz: " + res;
                     }
                     break;
             }
 
             textRes.setText(texto);
-        }  catch (Exception ex) {
-	        // No muestra mensaje de error por ahora
-	    }
+        } catch (Exception ex) {
+         
+        }
     }
 
     public static void main(String[] args) {
