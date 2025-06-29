@@ -304,6 +304,7 @@ public class VentanaMatrices extends JFrame {
                 case "multiplicarEscalar":
                 	int escalar = Integer.parseInt(escalarField.getText());
                 	resultado = Operaciones.multiplicarEscalar(a, escalar);
+                	ans = resultado;
                     break;
                 case "transpuesta":
                 	resultado = Operaciones.transpuesta(a);
