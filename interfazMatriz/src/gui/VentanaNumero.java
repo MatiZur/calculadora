@@ -56,19 +56,35 @@ public class VentanaNumero extends JFrame {
         textRes.setEditable(false);
         add(textRes);
 
-        agregarBoton("Suma", 400, 11);
-        agregarBoton("Resta", 400, 45);
-        agregarBoton("Multiplicacion", 400, 79);
-        agregarBoton("Division", 400, 113);
-        agregarBoton("Potencia", 400, 147);
-        agregarBoton("Raiz", 400, 181);
-    }
+        JButton btnSuma = new JButton("Suma");
+        btnSuma.setBounds(400, 11, 110, 23);
+        btnSuma.addActionListener(e -> realizarOperacion("Suma"));
+        add(btnSuma);
 
-    private void agregarBoton(String operacion, int x, int y) {
-        JButton btn = new JButton(operacion);
-        btn.setBounds(x, y, 110, 23);
-        btn.addActionListener(e -> realizarOperacion(operacion));
-        add(btn);
+        JButton btnResta = new JButton("Resta");
+        btnResta.setBounds(400, 45, 110, 23);
+        btnResta.addActionListener(e -> realizarOperacion("Resta"));
+        add(btnResta);
+
+        JButton btnMultiplicacion = new JButton("Multiplicacion");
+        btnMultiplicacion.setBounds(400, 79, 110, 23);
+        btnMultiplicacion.addActionListener(e -> realizarOperacion("Multiplicacion"));
+        add(btnMultiplicacion);
+
+        JButton btnDivision = new JButton("Division");
+        btnDivision.setBounds(400, 113, 110, 23);
+        btnDivision.addActionListener(e -> realizarOperacion("Division"));
+        add(btnDivision);
+
+        JButton btnPotencia = new JButton("Potencia");
+        btnPotencia.setBounds(400, 147, 110, 23);
+        btnPotencia.addActionListener(e -> realizarOperacion("Potencia"));
+        add(btnPotencia);
+
+        JButton btnRaiz = new JButton("Raiz");
+        btnRaiz.setBounds(400, 181, 110, 23);
+        btnRaiz.addActionListener(e -> realizarOperacion("Raiz"));
+        add(btnRaiz);
     }
 
     private void realizarOperacion(String operacion) {
@@ -108,12 +124,12 @@ public class VentanaNumero extends JFrame {
                     }
                     break;
                 case "Potencia":
-                	if(num2==0) {
-                		res = 1;
-                	}else {
-                    res = (float) Math.pow(num1, num2);
-                	}
-                	texto = "Potencia: " + res;
+                    if (num2 == 0) {
+                        res = 1;
+                    } else {
+                        res = (float) Math.pow(num1, num2);
+                    }
+                    texto = "Potencia: " + res;
                     break;
                 case "Raiz":
                     if (num2 == 0) {
