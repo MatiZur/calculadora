@@ -5,145 +5,136 @@ import javax.swing.*;
 public class VentanaNumero extends JFrame {
     private JTextField textN1;
     private JTextField textN2;
-    private JTextField textPR;
-    private JTextField textExpo;
-    private JTextArea textRes;
+    private JLabel lblRes;
 
+    float ans;
+    
     public VentanaNumero() {
-        setTitle("Calculadora");
-        setSize(550, 300);
+        setTitle("Calculadora - Números");
+        setSize(700, 325);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
+        setLocationRelativeTo(null);
+        getContentPane().setLayout(null);
 
-        JLabel lblN1 = new JLabel("Numero 1:");
-        lblN1.setBounds(10, 15, 70, 14);
-        add(lblN1);
+        JLabel lblN1 = new JLabel("Número 1 / Base:");
+        lblN1.setBounds(85, 45, 100, 15);
+        getContentPane().add(lblN1);
 
         textN1 = new JTextField();
-        textN1.setBounds(80, 11, 100, 23);
-        add(textN1);
+        textN1.setBounds(190, 42, 100, 23);
+        getContentPane().add(textN1);
 
-        JLabel lblN2 = new JLabel("Numero 2:");
-        lblN2.setBounds(10, 49, 70, 14);
-        add(lblN2);
+        JLabel lblN2 = new JLabel("Número 2 / Exponente:");
+        lblN2.setBounds(350, 45, 130, 15);
+        getContentPane().add(lblN2);
 
         textN2 = new JTextField();
-        textN2.setBounds(80, 45, 100, 23);
-        add(textN2);
-
-        JLabel lblPotenciaRaiz = new JLabel("Base:");
-        lblPotenciaRaiz.setBounds(10, 132, 70, 14);
-        add(lblPotenciaRaiz);
-
-        textPR = new JTextField();
-        textPR.setBounds(80, 129, 100, 23);
-        add(textPR);
-
-        JLabel lblExpo = new JLabel("Exponente:");
-        lblExpo.setBounds(200, 132, 70, 14);
-        add(lblExpo);
-
-        textExpo = new JTextField();
-        textExpo.setBounds(280, 129, 100, 23);
-        add(textExpo);
+        textN2.setBounds(485, 42, 100, 23);
+        getContentPane().add(textN2);
 
         JLabel lblResultado = new JLabel("Resultado:");
-        lblResultado.setBounds(10, 205, 70, 14);
-        add(lblResultado);
+        lblResultado.setBounds(260, 225, 70, 14);
+        getContentPane().add(lblResultado);
 
-        textRes = new JTextArea();
-        textRes.setBounds(80, 200, 200, 22);
-        textRes.setEditable(false);
-        add(textRes);
+        lblRes = new JLabel(" ");
+        lblRes.setBounds(340, 225, 200, 14);
+        getContentPane().add(lblRes);
 
-        JButton btnSuma = new JButton("Suma");
-        btnSuma.setBounds(400, 11, 110, 23);
-        btnSuma.addActionListener(e -> realizarOperacion("Suma"));
-        add(btnSuma);
-
-        JButton btnResta = new JButton("Resta");
-        btnResta.setBounds(400, 45, 110, 23);
-        btnResta.addActionListener(e -> realizarOperacion("Resta"));
-        add(btnResta);
-
-        JButton btnMultiplicacion = new JButton("Multiplicacion");
-        btnMultiplicacion.setBounds(400, 79, 110, 23);
-        btnMultiplicacion.addActionListener(e -> realizarOperacion("Multiplicacion"));
-        add(btnMultiplicacion);
-
-        JButton btnDivision = new JButton("Division");
-        btnDivision.setBounds(400, 113, 110, 23);
-        btnDivision.addActionListener(e -> realizarOperacion("Division"));
-        add(btnDivision);
-
-        JButton btnPotencia = new JButton("Potencia");
-        btnPotencia.setBounds(400, 147, 110, 23);
-        btnPotencia.addActionListener(e -> realizarOperacion("Potencia"));
-        add(btnPotencia);
-
-        JButton btnRaiz = new JButton("Raiz");
-        btnRaiz.setBounds(400, 181, 110, 23);
-        btnRaiz.addActionListener(e -> realizarOperacion("Raiz"));
-        add(btnRaiz);
+        JButton borrarBtn = new JButton("Borrar");
+        borrarBtn.setBounds(250, 75, 80, 23);
+        borrarBtn.addActionListener(e -> borrar());
+        getContentPane().add(borrarBtn);
+        
+        JButton ansBtn = new JButton("Ans");
+        ansBtn.setBounds(350, 75, 80, 23);
+        ansBtn.addActionListener(e -> ans());
+        getContentPane().add(ansBtn);
+        
+        agregarBoton("Suma", 50, 145);
+        agregarBoton("Resta", 140, 145);
+        agregarBoton("Multiplicación", 230, 145);
+        agregarBoton("División", 355, 145);
+        agregarBoton("Raíz", 445, 145);
+        agregarBoton("Potencia", 535, 145);
     }
 
+    private void agregarBoton(String operacion, int x, int y) {
+        JButton btn = new JButton(operacion);
+        btn.setBounds(x, y, 80, 23);
+        if(operacion == "Multiplicación"){
+        	btn.setBounds(x, y, 115, 23);
+        }
+        else if(operacion == "Potencia"){
+        	btn.setBounds(x, y, 90, 23);
+        }
+        btn.addActionListener(e -> realizarOperacion(operacion));
+        getContentPane().add(btn);
+    }
+
+    private void borrar(){
+    	textN1.setText(null);
+    	textN2.setText(null);
+    	lblRes.setText(null);
+    }
+    
+    private void ans(){
+    	textN1.setText("" + ans);
+    	textN2.setText(null);
+    }
+    
     private void realizarOperacion(String operacion) {
         try {
             float num1;
             float num2;
             float res = 0;
             String texto = "";
-
-            if (operacion.equals("Potencia") || operacion.equals("Raiz")) {
-                num1 = Float.parseFloat(textPR.getText());
-                num2 = Float.parseFloat(textExpo.getText());
-            } else {
-                num1 = Float.parseFloat(textN1.getText());
-                num2 = Float.parseFloat(textN2.getText());
-            }
+            num1 = Float.parseFloat(textN1.getText());
+            num2 = Float.parseFloat(textN2.getText());
 
             switch (operacion) {
                 case "Suma":
                     res = num1 + num2;
-                    texto = "Suma: " + res;
+                    ans = res;
+                    texto = "" + res;
                     break;
                 case "Resta":
                     res = num1 - num2;
-                    texto = "Resta: " + res;
+                    ans = res;
+                    texto = "" + res;
                     break;
-                case "Multiplicacion":
+                case "Multiplicación":
                     res = num1 * num2;
-                    texto = "Multiplicacion: " + res;
+                    ans = res;
+                    texto = "" + res;
                     break;
-                case "Division":
+                case "División":
                     if (num2 == 0) {
-                        texto = "Error: Division por cero.";
+                        texto = "Error: División por cero";
                     } else {
                         res = num1 / num2;
-                        texto = "Division: " + res;
+                        ans = res;
+                        texto = "" + res;
                     }
                     break;
                 case "Potencia":
-                    if (num2 == 0) {
-                        res = 1;
-                    } else {
-                        res = (float) Math.pow(num1, num2);
-                    }
-                    texto = "Potencia: " + res;
+                    res = (float) Math.pow(num1, num2);
+                    ans = res;
+                	texto = "" + res;
                     break;
-                case "Raiz":
+                case "Raíz":
                     if (num2 == 0) {
-                        texto = "Error: Indice cero.";
+                        texto = "Error: Índice cero";
                     } else {
                         res = (float) Math.pow(num1, 1.0 / num2);
-                        texto = "Raiz: " + res;
+                        ans = res;
+                        texto = "" + res;
                     }
                     break;
             }
 
-            textRes.setText(texto);
+            lblRes.setText(texto);
         } catch (Exception ex) {
-            textRes.setText("Error en los valores.");
+        	lblRes.setText("Error en los valores");
         }
     }
 
