@@ -12,8 +12,10 @@ public class VentanaMatrices extends JFrame {
     private JTextArea resultadoArea;
     private JTextField[][] camposA, camposB;
 
+    float[][] ans = null;
+    
      public VentanaMatrices() {
-        setTitle("Operaciones con Matrices");
+        setTitle("Calculadora - Matrices");
         setSize(742, 600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -38,6 +40,14 @@ public class VentanaMatrices extends JFrame {
         JButton generarBtn = new JButton("Generar");
         generarBtn.setBounds(240, 10, 100, 25);
         getContentPane().add(generarBtn);
+        
+        JButton borrarBtn = new JButton("Borrar");
+        borrarBtn.setBounds(350, 10, 100, 25);
+        getContentPane().add(borrarBtn);
+        
+        JButton ansBtn = new JButton("Ans");
+        ansBtn.setBounds(460, 10, 100, 25);
+        getContentPane().add(ansBtn);
 
         panelMatrizA = new JPanel();
         panelMatrizA.setBorder(BorderFactory.createTitledBorder("Matriz A"));
@@ -66,6 +76,8 @@ public class VentanaMatrices extends JFrame {
         getContentPane().add(restarBtn);
 
         generarBtn.addActionListener(e -> generarCampos());
+        borrarBtn.addActionListener(e -> borrarCampos());
+        ansBtn.addActionListener(e -> ansCampoA());
 
         sumarBtn.addActionListener(e -> realizarOperacion("sumar"));
         restarBtn.addActionListener(e -> realizarOperacion("restar"));
@@ -132,6 +144,29 @@ public class VentanaMatrices extends JFrame {
     	        JOptionPane.showMessageDialog(this, "Faltan los numeros", "Error", JOptionPane.ERROR_MESSAGE);
     	    }
     	}
+     
+     private void borrarCampos(){
+    	 	filasField.setText(null);
+	        columnasField.setText(null);
+	        resultadoArea.setText(null);
+	        panelMatrizA.removeAll();
+	    	panelMatrizB.removeAll();
+	        panelMatrizA.repaint();
+	        panelMatrizB.repaint();
+     }
+     
+     private void ansCampoA(){
+    	 	String filas = String.valueOf(ans.length);
+    	 	String columnas = String.valueOf(ans[0].length);
+ 	 		filasField.setText(filas);
+ 	 		columnasField.setText(columnas);
+	        generarCampos();
+	        for (int i = 0; i < ans.length; i++) {
+                for (int j = 0; j < ans[0].length; j++) {
+                    camposA[i][j].setText(String.valueOf(ans[i][j]));
+                }
+            }
+     }
 
      private void realizarOperacion(String operacion) {
     	    try {
@@ -163,24 +198,29 @@ public class VentanaMatrices extends JFrame {
     	        switch (operacion) {
     	            case "sumar":
     	                resultado = Matrices.sumar(a, b);
+    	                ans = resultado;
     	                break;
     	            case "restar":
     	                resultado = Matrices.restar(a, b);
+    	                ans = resultado;
     	                break;
     	            case "multiplicar":
     	                if (a[0].length != b.length) {
     	                    return; // No hace nada si no es compatible
     	                }
     	                resultado = Matrices.multiplicarMatrices(a, b);
+    	                ans = resultado;
     	                break;
     	            case "dividir":
     	                resultado = Matrices.dividirMatrices(a, b);
+    	                ans = resultado;
     	                if (resultado == null) {
     	                    return; // No hace nada si no es invertible
     	                }
     	                break;
     	            case "inversa":
     	                resultado = Matrices.inversa(a);
+    	                ans = resultado;
     	                if (resultado == null) {
     	                    return; // No hace nada si no es invertible
     	                }
