@@ -108,8 +108,12 @@ public class VentanaNumero extends JFrame {
                     }
                     break;
                 case "Potencia":
+                	if(num2==0) {
+                		res = 1;
+                	}else {
                     res = (float) Math.pow(num1, num2);
-                    texto = "Potencia: " + res;
+                	}
+                	texto = "Potencia: " + res;
                     break;
                 case "Raiz":
                     if (num2 == 0) {
