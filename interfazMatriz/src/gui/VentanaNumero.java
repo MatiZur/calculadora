@@ -6,11 +6,12 @@ public class VentanaNumero extends JFrame {
     private JTextField textN1;
     private JTextField textN2;
     private JTextField textPR;
+    private JTextField textExpo;
     private JTextArea textRes;
 
     public VentanaNumero() {
         setTitle("Calculadora");
-        setSize(500, 300);
+        setSize(550, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
@@ -30,13 +31,21 @@ public class VentanaNumero extends JFrame {
         textN2.setBounds(80, 45, 100, 23);
         add(textN2);
 
-        JLabel lblPotenciaRaiz = new JLabel("Numero:");
+        JLabel lblPotenciaRaiz = new JLabel("Base:");
         lblPotenciaRaiz.setBounds(10, 132, 70, 14);
         add(lblPotenciaRaiz);
 
         textPR = new JTextField();
         textPR.setBounds(80, 129, 100, 23);
         add(textPR);
+
+        JLabel lblExpo = new JLabel("Exponente:");
+        lblExpo.setBounds(200, 132, 70, 14);
+        add(lblExpo);
+
+        textExpo = new JTextField();
+        textExpo.setBounds(280, 129, 100, 23);
+        add(textExpo);
 
         JLabel lblResultado = new JLabel("Resultado:");
         lblResultado.setBounds(10, 205, 70, 14);
@@ -47,17 +56,17 @@ public class VentanaNumero extends JFrame {
         textRes.setEditable(false);
         add(textRes);
 
-        agregarBoton("Suma", 250, 11);
-        agregarBoton("Resta", 360, 11);
-        agregarBoton("Multiplicacion", 250, 45);
-        agregarBoton("Division", 360, 45);
-        agregarBoton("Potencia", 250, 128);
-        agregarBoton("Raiz", 360, 128);
+        agregarBoton("Suma", 400, 11);
+        agregarBoton("Resta", 400, 45);
+        agregarBoton("Multiplicacion", 400, 79);
+        agregarBoton("Division", 400, 113);
+        agregarBoton("Potencia", 400, 147);
+        agregarBoton("Raiz", 400, 181);
     }
 
     private void agregarBoton(String operacion, int x, int y) {
         JButton btn = new JButton(operacion);
-        btn.setBounds(x, y, 100, 23);
+        btn.setBounds(x, y, 110, 23);
         btn.addActionListener(e -> realizarOperacion(operacion));
         add(btn);
     }
@@ -71,7 +80,7 @@ public class VentanaNumero extends JFrame {
 
             if (operacion.equals("Potencia") || operacion.equals("Raiz")) {
                 num1 = Float.parseFloat(textPR.getText());
-                num2 = Float.parseFloat(textN2.getText());
+                num2 = Float.parseFloat(textExpo.getText());
             } else {
                 num1 = Float.parseFloat(textN1.getText());
                 num2 = Float.parseFloat(textN2.getText());
@@ -114,7 +123,7 @@ public class VentanaNumero extends JFrame {
 
             textRes.setText(texto);
         } catch (Exception ex) {
-         
+            textRes.setText("Error en los valores.");
         }
     }
 
