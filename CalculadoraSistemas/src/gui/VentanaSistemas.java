@@ -1,359 +1,321 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.Font;
+import java.awt.event.*;
 
 import operaciones.OperacionesSistemas;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import javax.swing.JFormattedTextField;
-import java.awt.GridLayout;
-import java.awt.CardLayout;
-import javax.swing.BoxLayout;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JTextField;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import javax.swing.JTextArea;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+public class VentanaSistemas extends JFrame {
 
-public class VentanaSistemas extends JFrame{
+    private JPanel contentPane;
+    private JLabel lblSistemas3;
+    private JTextField txtX1, txtY1, txtZ1, txtR1;
+    private JTextField txtX2, txtY2, txtZ2, txtR2;
+    private JTextField txtX3, txtY3, txtZ3, txtR3;
+    private JLabel lblX1, lblY1, lblZ1, lblR1;
+    private JLabel lblX2, lblY2, lblZ2, lblR2;
+    private JLabel lblX3, lblY3, lblZ3, lblR3;
+    private JButton btnCalcular;
+    private JButton btnCalcular2x2;
+    private JLabel lblXE, lblYE, lblZE;
+    private JLabel lblX, lblY, lblZ;
+    private JComboBox<String> comboSistema;
 
-	private JPanel contentPane;
-	private JLabel lblSistemas3;
-	private JTextField txtX1;
-	private JTextField txtY1;
-	private JTextField txtZ1;
-	private JTextField txtR1;
-	private JTextField txtX2;
-	private JTextField txtY2;
-	private JTextField txtZ2;
-	private JTextField txtR2;
-	private JTextField txtX3;
-	private JTextField txtY3;
-	private JTextField txtZ3;
-	private JTextField txtR3;
-	private JLabel lblX1;
-	private JLabel lblY1;
-	private JLabel lblZ1;
-	private JLabel lblR1;
-	private JLabel lblX2;
-	private JLabel lblY2;
-	private JLabel lblZ2;
-	private JLabel lblR2;
-	private JLabel lblX3;
-	private JLabel lblY3;
-	private JLabel lblZ3;
-	private JLabel lblR3;
-	private JButton btnCalcular;
-	private JLabel lblXE;
-	private JLabel lblYE;
-	private JLabel lblZE;
-	private JLabel lblX;
-	private JLabel lblY;
-	private JLabel lblZ;
+    OperacionesSistemas operaciones;
 
-	OperacionesSistemas operaciones;
-	
-	public VentanaSistemas(){
-		operaciones = new OperacionesSistemas();
-		
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 498, 323);
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(192, 192, 192));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		
-		lblSistemas3 = new JLabel("Sistema 3 por 3");
-		lblSistemas3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSistemas3.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		
-		txtY1 = new JTextField();
-		txtY1.setHorizontalAlignment(SwingConstants.CENTER);
-		txtY1.setColumns(10);
-		
-		lblY1 = new JLabel("y");
-		lblY1.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		txtZ1 = new JTextField();
-		txtZ1.setHorizontalAlignment(SwingConstants.CENTER);
-		txtZ1.setColumns(10);
-		
-		lblZ1 = new JLabel("z");
-		lblZ1.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		txtY2 = new JTextField();
-		txtY2.setHorizontalAlignment(SwingConstants.CENTER);
-		txtY2.setColumns(10);
-		
-		lblY2 = new JLabel("y");
-		lblY2.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		txtZ2 = new JTextField();
-		txtZ2.setHorizontalAlignment(SwingConstants.CENTER);
-		txtZ2.setColumns(10);
-		
-		lblZ2 = new JLabel("z");
-		lblZ2.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		txtX2 = new JTextField();
-		txtX2.setHorizontalAlignment(SwingConstants.CENTER);
-		txtX2.setColumns(10);
-		
-		lblX2 = new JLabel("x");
-		lblX2.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		txtY3 = new JTextField();
-		txtY3.setHorizontalAlignment(SwingConstants.CENTER);
-		txtY3.setColumns(10);
-		
-		lblY3 = new JLabel("y");
-		lblY3.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		txtZ3 = new JTextField();
-		txtZ3.setHorizontalAlignment(SwingConstants.CENTER);
-		txtZ3.setColumns(10);
-		
-		lblZ3 = new JLabel("z");
-		lblZ3.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		txtX3 = new JTextField();
-		txtX3.setHorizontalAlignment(SwingConstants.CENTER);
-		txtX3.setColumns(10);
-		
-		lblX3 = new JLabel("x");
-		lblX3.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		lblX1 = new JLabel("x");
-		lblX1.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		txtX1 = new JTextField();
-		txtX1.setHorizontalAlignment(SwingConstants.CENTER);
-		txtX1.setColumns(10);
-		
-		btnCalcular = new JButton("Calcular");
-		btnCalcular.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				calcularSistema3();
-			}
-		});
-		
-		lblR1 = new JLabel("=");
-		lblR1.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		lblR2 = new JLabel("=");
-		lblR2.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		lblR3 = new JLabel("=");
-		lblR3.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		txtR1 = new JTextField();
-		txtR1.setHorizontalAlignment(SwingConstants.CENTER);
-		txtR1.setColumns(10);
-		
-		txtR2 = new JTextField();
-		txtR2.setHorizontalAlignment(SwingConstants.CENTER);
-		txtR2.setColumns(10);
-		
-		txtR3 = new JTextField();
-		txtR3.setHorizontalAlignment(SwingConstants.CENTER);
-		txtR3.setColumns(10);
-		
-		lblXE = new JLabel("x =");
-		lblXE.setHorizontalAlignment(SwingConstants.LEFT);
-		
-		lblYE = new JLabel("y =");
-		lblYE.setHorizontalAlignment(SwingConstants.LEFT);
-		
-		lblZE = new JLabel("z =");
-		lblZE.setHorizontalAlignment(SwingConstants.LEFT);
-		
-		lblX = new JLabel(" ");
-		
-		lblY = new JLabel(" ");
-		
-		lblZ = new JLabel(" ");
-		
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addComponent(lblSistemas3, GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(33)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblZE, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblZ, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblYE, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblY, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(txtX3, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-							.addGap(4)
-							.addComponent(lblX3, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(txtY3, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-							.addGap(4)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnCalcular)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblY3, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(txtZ3, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblZ3, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
-									.addGap(26)
-									.addComponent(lblR3, GroupLayout.PREFERRED_SIZE, 8, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(txtR3, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-										.addGroup(gl_contentPane.createSequentialGroup()
-											.addComponent(txtX2, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-											.addGap(4)
-											.addComponent(lblX2, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
-											.addGap(18)
-											.addComponent(txtY2, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-											.addGap(4)
-											.addComponent(lblY2, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
-											.addGap(18)
-											.addComponent(txtZ2, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-											.addGap(4)
-											.addComponent(lblZ2, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
-										.addGroup(gl_contentPane.createSequentialGroup()
-											.addComponent(txtX1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-											.addGap(4)
-											.addComponent(lblX1, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
-											.addGap(18)
-											.addComponent(txtY1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-											.addGap(4)
-											.addComponent(lblY1, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
-											.addGap(18)
-											.addComponent(txtZ1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-											.addGap(4)
-											.addComponent(lblZ1, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)))
-									.addGap(26))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblXE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblX, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.RELATED)))
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblR1)
-									.addGap(18)
-									.addComponent(txtR1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblR2, GroupLayout.PREFERRED_SIZE, 8, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(txtR2, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)))))
-					.addContainerGap(33, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblSistemas3, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-					.addGap(26)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtZ1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblZ1)
-								.addComponent(lblR1, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtR1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addComponent(txtY1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblY1))
-						.addComponent(txtX1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblX1)))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtX2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblX2))
-						.addComponent(txtY2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblY2))
-						.addComponent(txtZ2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblZ2))
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-							.addComponent(lblR2)
-							.addComponent(txtR2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtX3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblX3))
-						.addComponent(txtY3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblY3))
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-							.addComponent(txtZ3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(txtR3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblZ3)
-							.addComponent(lblR3)))
-					.addGap(18)
-					.addComponent(btnCalcular)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblXE)
-						.addComponent(lblX))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblYE)
-						.addComponent(lblY))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblZE)
-						.addComponent(lblZ))
-					.addGap(26))
-		);
-		contentPane.setLayout(gl_contentPane);
-	}
-	
-	public void calcularSistema3(){
-		int x1 = Integer.parseInt(txtX1.getText());
-		int y1 = Integer.parseInt(txtY1.getText());
-		int z1 = Integer.parseInt(txtZ1.getText());
-		int r1 = Integer.parseInt(txtR1.getText());
-		int x2 = Integer.parseInt(txtX2.getText());
-		int y2 = Integer.parseInt(txtY2.getText());
-		int z2 = Integer.parseInt(txtZ2.getText());
-		int r2 = Integer.parseInt(txtR2.getText());
-		int x3 = Integer.parseInt(txtX3.getText());
-		int y3 = Integer.parseInt(txtY3.getText());
-		int z3 = Integer.parseInt(txtZ3.getText());
-		int r3 = Integer.parseInt(txtR3.getText());
-		float[] variables = operaciones.sistema3(x1, y1, z1, r1, x2, y2, z2, r2, x3, y3, z3, r3);
-		lblX.setText(Float.toString(variables[0]));
-		lblY.setText(Float.toString(variables[1]));
-		lblZ.setText(Float.toString(variables[2]));
-	}
+    private boolean sistema3x3;
+
+    public VentanaSistemas() {
+        operaciones = new OperacionesSistemas();
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 550, 350);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        comboSistema = new JComboBox<>(new String[]{"2x2", "3x3"});
+        comboSistema.setBounds(20, 10, 100, 25);
+        contentPane.add(comboSistema);
+
+        lblSistemas3 = new JLabel("Sistema 3x3");
+        lblSistemas3.setFont(new Font("Tahoma", Font.PLAIN, 24));
+        lblSistemas3.setBounds(150, 10, 254, 30);
+        contentPane.add(lblSistemas3);
+
+    
+        txtX1 = new JTextField();
+        txtX1.setBounds(20, 60, 60, 25);
+        txtX1.setHorizontalAlignment(JTextField.CENTER);
+        contentPane.add(txtX1);
+
+        lblX1 = new JLabel("x");
+        lblX1.setBounds(85, 60, 20, 25);
+        lblX1.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblX1);
+
+        txtY1 = new JTextField();
+        txtY1.setBounds(110, 60, 60, 25);
+        txtY1.setHorizontalAlignment(JTextField.CENTER);
+        contentPane.add(txtY1);
+
+        lblY1 = new JLabel("y");
+        lblY1.setBounds(175, 60, 20, 25);
+        lblY1.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblY1);
+
+        txtZ1 = new JTextField();
+        txtZ1.setBounds(200, 60, 60, 25);
+        txtZ1.setHorizontalAlignment(JTextField.CENTER);
+        contentPane.add(txtZ1);
+
+        lblZ1 = new JLabel("z");
+        lblZ1.setBounds(265, 60, 20, 25);
+        lblZ1.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblZ1);
+
+        lblR1 = new JLabel("=");
+        lblR1.setBounds(295, 60, 20, 25);
+        lblR1.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblR1);
+
+        txtR1 = new JTextField();
+        txtR1.setBounds(320, 60, 60, 25);
+        txtR1.setHorizontalAlignment(JTextField.CENTER);
+        contentPane.add(txtR1);
+
+        
+        txtX2 = new JTextField();
+        txtX2.setBounds(20, 100, 60, 25);
+        txtX2.setHorizontalAlignment(JTextField.CENTER);
+        contentPane.add(txtX2);
+
+        lblX2 = new JLabel("x");
+        lblX2.setBounds(85, 100, 20, 25);
+        lblX2.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblX2);
+
+        txtY2 = new JTextField();
+        txtY2.setBounds(110, 100, 60, 25);
+        txtY2.setHorizontalAlignment(JTextField.CENTER);
+        contentPane.add(txtY2);
+
+        lblY2 = new JLabel("y");
+        lblY2.setBounds(175, 100, 20, 25);
+        lblY2.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblY2);
+
+        txtZ2 = new JTextField();
+        txtZ2.setBounds(200, 100, 60, 25);
+        txtZ2.setHorizontalAlignment(JTextField.CENTER);
+        contentPane.add(txtZ2);
+
+        lblZ2 = new JLabel("z");
+        lblZ2.setBounds(265, 100, 20, 25);
+        lblZ2.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblZ2);
+
+        lblR2 = new JLabel("=");
+        lblR2.setBounds(295, 100, 20, 25);
+        lblR2.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblR2);
+
+        txtR2 = new JTextField();
+        txtR2.setBounds(320, 100, 60, 25);
+        txtR2.setHorizontalAlignment(JTextField.CENTER);
+        contentPane.add(txtR2);
+
+        
+        txtX3 = new JTextField();
+        txtX3.setBounds(20, 140, 60, 25);
+        txtX3.setHorizontalAlignment(JTextField.CENTER);
+        contentPane.add(txtX3);
+
+        lblX3 = new JLabel("x");
+        lblX3.setBounds(85, 140, 20, 25);
+        lblX3.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblX3);
+
+        txtY3 = new JTextField();
+        txtY3.setBounds(110, 140, 60, 25);
+        txtY3.setHorizontalAlignment(JTextField.CENTER);
+        contentPane.add(txtY3);
+
+        lblY3 = new JLabel("y");
+        lblY3.setBounds(175, 140, 20, 25);
+        lblY3.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblY3);
+
+        txtZ3 = new JTextField();
+        txtZ3.setBounds(200, 140, 60, 25);
+        txtZ3.setHorizontalAlignment(JTextField.CENTER);
+        contentPane.add(txtZ3);
+
+        lblZ3 = new JLabel("z");
+        lblZ3.setBounds(265, 140, 20, 25);
+        lblZ3.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblZ3);
+
+        lblR3 = new JLabel("=");
+        lblR3.setBounds(295, 140, 20, 25);
+        lblR3.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblR3);
+
+        txtR3 = new JTextField();
+        txtR3.setBounds(320, 140, 60, 25);
+        txtR3.setHorizontalAlignment(JTextField.CENTER);
+        contentPane.add(txtR3);
+
+       
+        lblXE = new JLabel("x =");
+        lblXE.setBounds(20, 190, 30, 25);
+        contentPane.add(lblXE);
+
+        lblX = new JLabel(" ");
+        lblX.setBounds(50, 190, 100, 25);
+        contentPane.add(lblX);
+
+        lblYE = new JLabel("y =");
+        lblYE.setBounds(20, 215, 30, 25);
+        contentPane.add(lblYE);
+
+        lblY = new JLabel(" ");
+        lblY.setBounds(50, 215, 100, 25);
+        contentPane.add(lblY);
+
+        lblZE = new JLabel("z =");
+        lblZE.setBounds(20, 240, 30, 25);
+        contentPane.add(lblZE);
+
+        lblZ = new JLabel(" ");
+        lblZ.setBounds(50, 240, 100, 25);
+        contentPane.add(lblZ);
+
+      
+        btnCalcular = new JButton("Calcular 3x3");
+        btnCalcular.setBounds(400, 60, 110, 30);
+        contentPane.add(btnCalcular);
+
+        btnCalcular2x2 = new JButton("Calcular 2x2");
+        btnCalcular2x2.setBounds(400, 100, 110, 30);
+        contentPane.add(btnCalcular2x2);
+
+        
+        btnCalcular.addActionListener(e -> calcularSistema3());
+        btnCalcular2x2.addActionListener(e -> calcularSistema2());
+
+
+        comboSistema.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                sistema3x3 = comboSistema.getSelectedItem().equals("3x3");
+                actualizarComponentesSegunSistema();
+            }
+        });
+
+        
+        sistema3x3 = comboSistema.getSelectedItem().equals("3x3");
+        actualizarComponentesSegunSistema();
+    }
+
+    private void actualizarComponentesSegunSistema() {
+    	if (sistema3x3) {
+    	    lblSistemas3.setText("Sistema 3x3");
+    	} else {
+    	    lblSistemas3.setText("Sistema 2x2");
+    	}      
+        txtZ1.setVisible(sistema3x3);
+        lblZ1.setVisible(sistema3x3);
+        txtZ2.setVisible(sistema3x3);
+        lblZ2.setVisible(sistema3x3);
+        txtZ3.setVisible(sistema3x3);
+        lblZ3.setVisible(sistema3x3);
+        txtX3.setVisible(sistema3x3);
+        lblX3.setVisible(sistema3x3);
+        txtY3.setVisible(sistema3x3);
+        lblY3.setVisible(sistema3x3);
+        txtR3.setVisible(sistema3x3);
+        lblR3.setVisible(sistema3x3);
+
+        lblZE.setVisible(sistema3x3);
+        lblZ.setVisible(sistema3x3);
+
+        
+        limpiarCampos();
+    }
+
+    private void limpiarCampos() {
+        txtX1.setText("");
+        txtY1.setText("");
+        txtZ1.setText("");
+        txtR1.setText("");
+        txtX2.setText("");
+        txtY2.setText("");
+        txtZ2.setText("");
+        txtR2.setText("");
+        txtX3.setText("");
+        txtY3.setText("");
+        txtZ3.setText("");
+        txtR3.setText("");
+        lblX.setText("");
+        lblY.setText("");
+        lblZ.setText("");
+    }
+
+    public void calcularSistema3() {
+        try {
+            int x1 = Integer.parseInt(txtX1.getText());
+            int y1 = Integer.parseInt(txtY1.getText());
+            int z1 = Integer.parseInt(txtZ1.getText());
+            int r1 = Integer.parseInt(txtR1.getText());
+            int x2 = Integer.parseInt(txtX2.getText());
+            int y2 = Integer.parseInt(txtY2.getText());
+            int z2 = Integer.parseInt(txtZ2.getText());
+            int r2 = Integer.parseInt(txtR2.getText());
+            int x3 = Integer.parseInt(txtX3.getText());
+            int y3 = Integer.parseInt(txtY3.getText());
+            int z3 = Integer.parseInt(txtZ3.getText());
+            int r3 = Integer.parseInt(txtR3.getText());
+
+            float[] variables = operaciones.sistema3(x1, y1, z1, r1, x2, y2, z2, r2, x3, y3, z3, r3);
+
+            lblX.setText(Float.toString(variables[0]));
+            lblY.setText(Float.toString(variables[1]));
+            lblZ.setText(Float.toString(variables[2]));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingresá bien los números.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void calcularSistema2() {
+        try {
+            int x1 = Integer.parseInt(txtX1.getText());
+            int y1 = Integer.parseInt(txtY1.getText());
+            int r1 = Integer.parseInt(txtR1.getText());
+            int x2 = Integer.parseInt(txtX2.getText());
+            int y2 = Integer.parseInt(txtY2.getText());
+            int r2 = Integer.parseInt(txtR2.getText());
+
+            float[] res = operaciones.sistema2(x1, y1, r1, x2, y2, r2);
+            lblX.setText(Float.toString(res[0]));
+            lblY.setText(Float.toString(res[1]));
+            lblZ.setText("-");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingresá bien los números.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
+            try {
+                VentanaSistemas frame = new VentanaSistemas();
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
 }
